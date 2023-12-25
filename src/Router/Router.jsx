@@ -54,7 +54,6 @@ import Update from "../Dashboard/Update";
           element:<Update></Update>,
         },
 
-        
       ]
     },
 

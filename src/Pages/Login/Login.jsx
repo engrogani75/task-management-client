@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 
 const Login = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { signIn } = useAuth()
+    const { signIn, googleSignIn } = useAuth()
     const navigate = useNavigate();
     const location = useLocation();
     const from = "/dashboard";
@@ -45,6 +45,17 @@ const Login = () => {
         
           })
     }
+
+    const googleHandle = () =>{
+        googleSignIn()
+        .then(res =>{
+          console.log(res.user);
+          navigate("/")
+        })
+        .catch(err =>{
+          console.error(err);
+        })
+      }
 
 
 
@@ -88,6 +99,7 @@ const Login = () => {
 </div>
 <Button type="submit">Login</Button>
 </form>
+<h2>Sing in with <button onClick={googleHandle}><span className='text-2xl font-bold text-blue-800'>Google</span></button></h2>
 <h2>new  User! Pls  <Link to='/registation'>Registation</Link> </h2>
   </div>
    </div>

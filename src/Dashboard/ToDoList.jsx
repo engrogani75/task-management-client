@@ -42,7 +42,7 @@ const ToDoList = () => {
     const deleteHandle =(id) =>{
       const proced = confirm('are you sure remove this one')
       if (proced) {
-        fetch(`http://localhost:5000/create-task/${id}`, {
+        fetch(`https://task-management-server-pearl-kappa.vercel.app/create-task/${id}`, {
           method: 'DELETE'
         })
         .then(res => res.json())
