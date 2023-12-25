@@ -1,0 +1,14 @@
+.bg{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(231,232,209,1) 52%, rgba(0,212,255,1) 100%);
+}
+.vertical {
+    border-left: 6px solid blue;
+    height: 200px;
+    position:absolute;
+    left: 50%;
+  }
+
+  .btn-lets{
+    font-size: 2rem;
+  }
