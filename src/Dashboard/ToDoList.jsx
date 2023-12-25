@@ -1,7 +1,10 @@
 import { useState } from "react";
 import useTask from "../Hooks/useTask";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
+import { FaRegWindowClose } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 
 const ToDoList = () => {
@@ -35,14 +38,42 @@ const ToDoList = () => {
 
     }
 
+
+    const deleteHandle =(id) =>{
+      const proced = confirm('are you sure remove this one')
+      if (proced) {
+        fetch(`http://localhost:5000/create-task/${id}`, {
+          method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data =>{
+          if (data.deletedCount > 0) {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Delete',
+              text: 'Dlete has been sucessfully',
+            })
+            refetch()
+          }
+        })
+      }
+
+    }
+
+    
+
+
+
+
+
     return (
 
         <DragDropContext onDragEnd={onDragEnd}> 
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-3 gap-2">
         <Droppable droppableId="ROOT" type="group">
           {(provided) => (
             <div ref={provided?.innerRef} {...provided?.droppableProps}>
-              <h2>ToDo List</h2>
+              <h2 className="text-2xl font-bold text-center border-2">ToDo List</h2>
               <div>
                 {todoFilter.map((item, index) => (
                   <Draggable key={item?.id} draggableId={item?.id} index={index}>
@@ -52,9 +83,15 @@ const ToDoList = () => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <li key={item?.id} className="my-6 text-xl list-none font-bold">
+                      
+                       <li key={item?.id} className="my-3 text-xl list-none
+                        bg-blue-800 py-4 px-1 capitalize text-white text-center font-bold pointer flex gap-1">
                           {item?.taskName}
+                          <button onClick={() =>deleteHandle(item._id)}><FaRegWindowClose /></button>
+                         <Link to={`update/${item._id}`}> <button><MdEdit /></button> </Link>
                         </li>
+                        
+                     
                       </div>
                     )}
                   </Draggable>
@@ -66,7 +103,7 @@ const ToDoList = () => {
         <Droppable droppableId="ROOT" type="group">
           {(provided) => (
             <div ref={provided?.innerRef} {...provided?.droppableProps}>
-              <h2>Ongoing</h2>
+              <h2 className="text-2xl font-bold text-center border-2">Ongoing</h2>
               <div>
                 {ongoingFilter.map((item, index) => (
                   <Draggable key={item?.id} draggableId={item?.id} index={index}>
@@ -76,9 +113,13 @@ const ToDoList = () => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <li key={item?.id} className="my-6 text-xl list-none font-bold">
+                        <li key={item?.id} className="my-3 text-xl list-none
+                        bg-blue-800 py-4 px-1 capitalize text-white text-center font-bold pointer flex gap-1">
                           {item?.taskName}
+                          <button onClick={() =>deleteHandle(item._id)}><FaRegWindowClose /></button>
+                          <button><MdEdit /></button>
                         </li>
+                        
                       </div>
                     )}
                   </Draggable>
@@ -90,7 +131,7 @@ const ToDoList = () => {
         <Droppable droppableId="ROOT" type="group"  >
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              <h2>completed</h2>
+              <h2 className="text-2xl font-bold text-center border-2">completed</h2>
               <div>
                 {completedFilter.map((item, index) => (
                   <Draggable key={item?.id} draggableId={item?.id} index={index}>
@@ -100,8 +141,11 @@ const ToDoList = () => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <li key={item?.id} className="my-6 text-xl list-none font-bold">
+                        <li key={item?.id} className="my-3 text-xl list-none
+                        bg-blue-800 py-4 px-1 capitalize text-white text-center font-bold pointer flex gap-1">
                           {item?.taskName}
+                          <button onClick={() =>deleteHandle(item._id)}><FaRegWindowClose /></button>
+                          <button><MdEdit /></button> 
                         </li>
                       </div>
                     )}

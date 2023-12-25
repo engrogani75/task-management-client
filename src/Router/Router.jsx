@@ -7,8 +7,10 @@ import Registation from "../Pages/Registation/Registation";
 import Home from "../Pages/Home/Home";
 import Dashboard from "../Dashboard/Dashboard";
 import NewTask from "../Dashboard/NewTask";
-import PreTask from "../Dashboard/PreTask";
+
 import ToDoList from "../Dashboard/ToDoList";
+import PrivatRouter from "./PrivatRouter";
+import Update from "../Dashboard/Update";
 
   export const router = createBrowserRouter([
     {
@@ -36,7 +38,7 @@ import ToDoList from "../Dashboard/ToDoList";
 
     {
       path: "dashboard",
-      element: <Dashboard></Dashboard>,
+      element: <PrivatRouter><Dashboard></Dashboard></PrivatRouter>,
       children: [
         {
           path: "new-task",
@@ -44,12 +46,12 @@ import ToDoList from "../Dashboard/ToDoList";
         },
 
         {
-          path: "pre-task",
-          element: <PreTask></PreTask>,
-        },
-        {
           path: "todo-list",
           element:<ToDoList></ToDoList>,
+        },
+        {
+          path: "todo-list/update/:id",
+          element:<Update></Update>,
         },
 
         

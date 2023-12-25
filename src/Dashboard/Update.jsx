@@ -1,85 +1,25 @@
+import React from 'react';
 'use client';
 
 import { Button, Checkbox, Label, Select, TextInput, Textarea } from 'flowbite-react';
-
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-
 import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2';
-import useAuth from '../Hooks/useAuth';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
 
+const Update = () => {
 
-
-
-
-
-const NewTask = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const axiosSecure = useAxiosSecure()
-
-    const {user} = useAuth()
-
-    const onSubmit = data =>{
-        console.log(data);
-
-        const taskInfo = {
-            taskName: data?.taskName,
-            position: data?.position,
-            description: data?.description,
-            deadlines: data?.deadlines,
-            priority: data?.priority,
-            status: data?.status,
-            name: user?.displayName,
-            email: user?.email,
-        }
-
-        axiosSecure.post('/create-task', taskInfo)
-        .then(res => {
-            // console.log(res);
-            if(res.data.insertedId){
-
-              reset();
-            
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'your info has been successfully.',
-                showConfirmButton: false,
-                timer: 1500
-            });
-          
-            }
-
-          })
-
-          .catch(error => {
-            if(error){
-              Swal.fire({
-                position: 'top-end',
-                icon: 'warning',
-                title: 'your info not save',
-                showConfirmButton: false,
-                timer: 1500
-            });
-
-            }
-           
-          })
-   
-    }
-
-   
 
 
-  return (
+const onSubmit = () =>{
 
-    <div className='flex justify-center item-center'>
+}
+
+    return (
+        <div className='flex justify-center item-center'>
        
 
         <form className="flex lg:w-96 flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-        <h1 className='text-2xl font-bold text-blue-800 capitalize my-10'>Please create your Task</h1>
+        <h1 className='text-2xl font-bold text-blue-800 capitalize my-10'>Please update your Task</h1>
     <div>
       <div>
         <div className="mb-2 block">
@@ -122,7 +62,7 @@ const NewTask = () => {
     <div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="deadlines" value="Deadlines" />
+          <Label htmlFor="deadlines" defaultValue="Deadlines" />
         </div>
         <TextInput
           id="deadlines"
@@ -161,7 +101,7 @@ const NewTask = () => {
     <Button type="submit">Submit</Button>
     </form>
     </div>
-  );
+    );
 };
 
-export default NewTask;
+export default Update;

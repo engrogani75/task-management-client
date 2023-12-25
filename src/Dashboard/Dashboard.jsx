@@ -44,12 +44,7 @@ transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
         </NavLink>
      </li>
 
-     <li>
-        <NavLink to='pre-task' className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-      
-           <span className="ms-3">Previous task</span>
-        </NavLink>
-     </li>
+    
 
      <li>
         <NavLink to='todo-list' className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
